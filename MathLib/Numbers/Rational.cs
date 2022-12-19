@@ -1,4 +1,6 @@
-﻿namespace MathLib.Numbers;
+﻿using MathLib.Functions;
+
+namespace MathLib.Numbers;
 
 /// <summary>
 /// Represents a rational number.
@@ -6,12 +8,13 @@
 public struct Rational
 {
     /// <summary>
-    /// Creates a rational number from a numerator and a denominator.
+    /// Create a rational number from a numerator and a denominator.
     /// </summary>
     /// <param name="numerator">Numerator.</param>
     /// <param name="denominator">Denominator.</param>
     public Rational(int numerator, int denominator)
     {
+        Func.MakeCoprime(ref numerator, ref denominator);
         Numerator = numerator;
         Denominator = denominator;
     }
@@ -25,4 +28,10 @@ public struct Rational
     /// Denominator.
     /// </summary>
     public int Denominator { get; }
+
+    /// <summary>
+    /// Convert a rational number to a string.
+    /// </summary>
+    /// <returns>String representation of a rational number.</returns>
+    public override string ToString() => $"{Numerator}/{Denominator}";
 }
