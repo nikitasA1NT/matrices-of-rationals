@@ -1,18 +1,19 @@
-﻿using MathLib.Functions;
+﻿using System.Numerics;
+using MathLib.Functions;
 
 namespace MathLib.Numbers;
 
 /// <summary>
 /// Represents a rational number.
 /// </summary>
-public struct Rational
+public struct Rational<T> where T : IBinaryInteger<T>
 {
     /// <summary>
     /// Create a rational number from a numerator and a denominator.
     /// </summary>
     /// <param name="numerator">Numerator.</param>
     /// <param name="denominator">Denominator.</param>
-    public Rational(int numerator, int denominator)
+    public Rational(T numerator, T denominator)
     {
         Func.MakeCoprime(ref numerator, ref denominator);
         Numerator = numerator;
@@ -22,12 +23,12 @@ public struct Rational
     /// <summary>
     /// Numerator.
     /// </summary>
-    public int Numerator { get; }
+    public T Numerator { get; }
 
     /// <summary>
     /// Denominator.
     /// </summary>
-    public int Denominator { get; }
+    public T Denominator { get; }
 
     /// <summary>
     /// Convert a rational number to a string.

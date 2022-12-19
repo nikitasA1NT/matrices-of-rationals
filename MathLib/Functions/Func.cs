@@ -1,4 +1,6 @@
-﻿namespace MathLib.Functions;
+﻿using System.Numerics;
+
+namespace MathLib.Functions;
 
 /// <summary>
 /// Implements various functions and actions.
@@ -11,9 +13,9 @@ public static class Func
     /// <param name="a">First number.</param>
     /// <param name="b">Second number.</param>
     /// <returns>The greatest common divisor.</returns>
-    public static int GreatestCommonDivisor(int a, int b)
+    public static T GreatestCommonDivisor<T>(T a, T b) where T : IBinaryInteger<T>
     {
-        while (b != 0)
+        while (b != T.Zero)
         {
             var temp = b;
             b = a % b;
@@ -27,7 +29,7 @@ public static class Func
     /// </summary>
     /// <param name="a">First number.</param>
     /// <param name="b">Second number.</param>
-    public static void MakeCoprime(ref int a, ref int b)
+    public static void MakeCoprime<T>(ref T a, ref T b) where T : IBinaryInteger<T>
     {
         var greatestCommonDivisor = GreatestCommonDivisor(a, b);
         a /= greatestCommonDivisor;
