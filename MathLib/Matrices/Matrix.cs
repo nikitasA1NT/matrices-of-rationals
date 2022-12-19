@@ -43,7 +43,7 @@ public class Matrix<T> where T : INumber<T>
         {
             for (var j = 0; j < matrix1.MatrixArray.GetLength(1); j++)
             {
-                resultArr[i, j] = (dynamic)matrix1.MatrixArray[i, j]! + matrix2.MatrixArray[i, j];
+                resultArr[i, j] = (dynamic)matrix1.MatrixArray[i, j] + matrix2.MatrixArray[i, j];
             }
         }
 
@@ -71,19 +71,27 @@ public class Matrix<T> where T : INumber<T>
         {
             for (var j = 0; j < matrix1.MatrixArray.GetLength(1); j++)
             {
-                resultArr[i, j] = (dynamic)matrix1.MatrixArray[i, j]! - matrix2.MatrixArray[i, j];
+                resultArr[i, j] = (dynamic)matrix1.MatrixArray[i, j] - matrix2.MatrixArray[i, j];
             }
         }
 
         return new Matrix<T>(resultArr);
     }
     
-    // Multiply two matrices.
+    /// <summary>
+    /// Multiply two matrices.
+    /// </summary>
+    /// <param name="matrix1">First matrix.</param>
+    /// <param name="matrix2">Second matrix.</param>
+    /// <returns>New matrix from the multiplication of two others.</returns>
+    /// <exception cref="ArgumentException">The number of columns of the first matrix must be equal to the number of
+    /// rows of the second matrix.</exception>
     public static Matrix<T> operator *(Matrix<T> matrix1, Matrix<T> matrix2)
     {
         if (matrix1.MatrixArray.GetLength(1) != matrix2.MatrixArray.GetLength(0))
         {
-            throw new ArgumentException("The number of columns of the first matrix must be equal to the number of rows of the second matrix.");
+            throw new ArgumentException("The number of columns of the first matrix must be equal to the number" +
+                                        " of rows of the second matrix.");
         }
 
         var resultArr = new T[matrix1.MatrixArray.GetLength(0), matrix2.MatrixArray.GetLength(1)];
@@ -94,8 +102,29 @@ public class Matrix<T> where T : INumber<T>
             {
                 for (var k = 0; k < matrix1.MatrixArray.GetLength(1); k++)
                 {
-                    resultArr[i, j] = (dynamic)resultArr[i, j]! + matrix1.MatrixArray[i, k] * matrix2.MatrixArray[k, j];
+                    resultArr[i, j] = (dynamic)resultArr[i, j] + matrix1.MatrixArray[i, k] * matrix2.MatrixArray[k, j];
                 }
+            }
+        }
+
+        return new Matrix<T>(resultArr);
+    }
+    
+    /// <summary>
+    /// Multiply matrix by number.
+    /// </summary>
+    /// <param name="matrix">Matrix.</param>
+    /// <param name="number">Number.</param>
+    /// <returns>New matrix multiplied by a number.</returns>
+    public static Matrix<T> operator *(Matrix<T> matrix, T number)
+    {
+        var resultArr = new T[matrix.MatrixArray.GetLength(0), matrix.MatrixArray.GetLength(1)];
+
+        for (var i = 0; i < matrix.MatrixArray.GetLength(0); i++)
+        {
+            for (var j = 0; j < matrix.MatrixArray.GetLength(1); j++)
+            {
+                resultArr[i, j] = (dynamic)matrix.MatrixArray[i, j] * number;
             }
         }
 
