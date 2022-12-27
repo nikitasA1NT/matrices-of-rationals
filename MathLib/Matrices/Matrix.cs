@@ -6,7 +6,7 @@ namespace MathLib.Matrices;
 /// Represents a matrix.
 /// </summary>
 /// <typeparam name="T">Matrix from this type.</typeparam>
-public class Matrix<T> where T : INumber<T>
+public class Matrix<T> where T : struct, INumber<T>
 {
     /// <summary>
     /// Creates a matrix from a 2D array.
@@ -14,13 +14,18 @@ public class Matrix<T> where T : INumber<T>
     /// <param name="matrixArray">2D array to create a matrix.</param>
     public Matrix(T[,] matrixArray)
     {
+        if (matrixArray.Rank != 2)
+        {
+            throw new ArgumentException("The array must be 2D.");
+        }
+        
         MatrixArray = matrixArray;
     }
 
     /// <summary>
     /// Matrix array.
     /// </summary>
-    public T[,] MatrixArray { get; }
+    public T[,] MatrixArray { get; protected set; }
     
     /// <summary>
     /// Adds two matrices.
