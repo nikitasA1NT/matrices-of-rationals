@@ -12,6 +12,7 @@ public class SquareMatrix<T> : Matrix<T> where T : struct, INumber<T>
     /// Creates a square matrix from a 2D array.
     /// </summary>
     /// <param name="matrixArray">2D array to create a matrix.</param>
+    /// <exception cref="ArgumentException">Thrown when the matrix is not square.</exception>
     public SquareMatrix(T[,] matrixArray) : base(matrixArray)
     {
         if (matrixArray.GetLength(0) != matrixArray.GetLength(1))
@@ -79,5 +80,30 @@ public class SquareMatrix<T> : Matrix<T> where T : struct, INumber<T>
         }
 
         return det;
+    }
+    
+    /// <summary>
+    /// Calculates the invertible matrix. Incorrectly calculated for matrices of integer types.
+    /// </summary>
+    /// <returns>Invertible matrix.</returns>
+    /// <exception cref="ArithmeticException">Thrown when the determinant is zero.</exception>
+    public SquareMatrix<T> Invertible()
+    {
+        var det = Determinant();
+        if (det == T.Zero)
+        {
+            throw new ArithmeticException("Matrix is not invertible. Determinant is zero.");
+        }
+
+        var invertible = new T[MatrixArray.GetLength(0), MatrixArray.GetLength(1)];
+        for (var i = 0; i < MatrixArray.GetLength(0); i++)
+        {
+            for (var j = 0; j < MatrixArray.GetLength(1); j++)
+            {
+                invertible[i, j] = Cofactor(j, i) / det;
+            }
+        }
+
+        return new SquareMatrix<T>(invertible);
     }
 }
