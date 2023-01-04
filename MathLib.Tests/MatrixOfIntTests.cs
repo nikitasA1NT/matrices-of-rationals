@@ -2,7 +2,7 @@ using MathLib.Matrices;
 
 namespace MathLib.Tests;
 
-public class MatrixTests
+public class MatrixOfIntTests
 {
     private Matrix<int> _sourceMatrix = null!;
 
