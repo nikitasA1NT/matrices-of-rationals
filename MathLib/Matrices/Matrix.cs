@@ -130,4 +130,23 @@ public class Matrix<T> where T : INumber<T>
 
         return new Matrix<T>(resultArr);
     }
+    
+    /// <summary>
+    /// Transpose matrix.
+    /// </summary>
+    /// <returns>Transposed matrix.</returns>
+    public Matrix<T> Transpose()
+    {
+        var resultArr = new T[MatrixArray.GetLength(1), MatrixArray.GetLength(0)];
+
+        for (var i = 0; i < MatrixArray.GetLength(0); i++)
+        {
+            for (var j = 0; j < MatrixArray.GetLength(1); j++)
+            {
+                resultArr[j, i] = MatrixArray[i, j];
+            }
+        }
+
+        return new Matrix<T>(resultArr);
+    }
 }

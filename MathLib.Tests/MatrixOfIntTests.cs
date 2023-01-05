@@ -100,4 +100,26 @@ public class MatrixOfIntTests
             Assert.That(result.MatrixArray[1, 2], Is.EqualTo(12));
         });
     }
+
+    [Test]
+    public void Transpose()
+    {
+        var expectedArr = new[,]
+        {
+            {1, 4},
+            {2, 5},
+            {3, 6}
+        };
+        var expected = new Matrix<int>(expectedArr);
+        var actual = _sourceMatrix.Transpose();
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual.MatrixArray[0, 0], Is.EqualTo(expected.MatrixArray[0, 0]));
+            Assert.That(actual.MatrixArray[0, 1], Is.EqualTo(expected.MatrixArray[0, 1]));
+            Assert.That(actual.MatrixArray[1, 0], Is.EqualTo(expected.MatrixArray[1, 0]));
+            Assert.That(actual.MatrixArray[1, 1], Is.EqualTo(expected.MatrixArray[1, 1]));
+            Assert.That(actual.MatrixArray[2, 0], Is.EqualTo(expected.MatrixArray[2, 0]));
+            Assert.That(actual.MatrixArray[2, 1], Is.EqualTo(expected.MatrixArray[2, 1]));
+        });
+    }
 }
