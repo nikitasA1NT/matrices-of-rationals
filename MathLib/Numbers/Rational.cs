@@ -10,6 +10,15 @@ namespace MathLib.Numbers;
 public readonly struct Rational<T> : INumber<Rational<T>> where T : IBinaryInteger<T>
 {
     /// <summary>
+    /// Defines the zero value.
+    /// </summary>
+    public Rational()
+    {
+        Numerator = T.Zero;
+        Denominator = T.One;
+    }
+
+    /// <summary>
     /// Create a rational number from a numerator and a denominator.
     /// </summary>
     /// <param name="numerator">Numerator.</param>
@@ -284,7 +293,9 @@ public readonly struct Rational<T> : INumber<Rational<T>> where T : IBinaryInteg
 
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
     {
-        throw new NotImplementedException();
+        // TODO: Implement this. Now it's just a stub.
+        charsWritten = 0;
+        return false;
     }
 
     public static Rational<T> Parse(string s, IFormatProvider? provider)

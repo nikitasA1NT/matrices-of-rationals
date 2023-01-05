@@ -6,7 +6,7 @@ namespace MathLib.Matrices;
 /// Represents a square matrix.
 /// </summary>
 /// <typeparam name="T">Matrix from this type.</typeparam>
-public class SquareMatrix<T> : Matrix<T> where T : INumber<T>
+public class SquareMatrix<T> : Matrix<T> where T : INumber<T>, new()
 {
     /// <summary>
     /// Creates a square matrix from a 2D array.

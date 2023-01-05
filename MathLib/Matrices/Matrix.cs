@@ -6,7 +6,7 @@ namespace MathLib.Matrices;
 /// Represents a matrix.
 /// </summary>
 /// <typeparam name="T">Matrix from this type.</typeparam>
-public class Matrix<T> where T : INumber<T>
+public class Matrix<T> where T : INumber<T>, new()
 {
     /// <summary>
     /// Creates a matrix from a 2D array.
@@ -95,6 +95,13 @@ public class Matrix<T> where T : INumber<T>
         }
 
         var resultArr = new T[matrix1.MatrixArray.GetLength(0), matrix2.MatrixArray.GetLength(1)];
+        for (var i = 0; i < resultArr.GetLength(0); i++)
+        {
+            for (var j = 0; j < resultArr.GetLength(1); j++)
+            {
+                resultArr[i, j] = new T();
+            }
+        }
 
         for (var i = 0; i < matrix1.MatrixArray.GetLength(0); i++)
         {
