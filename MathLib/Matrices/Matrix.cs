@@ -6,7 +6,7 @@ namespace MathLib.Matrices;
 /// Represents a matrix.
 /// </summary>
 /// <typeparam name="T">Matrix from this type.</typeparam>
-public class Matrix<T> where T : struct, INumber<T>
+public class Matrix<T> where T : INumber<T>
 {
     /// <summary>
     /// Creates a matrix from a 2D array.
@@ -14,18 +14,13 @@ public class Matrix<T> where T : struct, INumber<T>
     /// <param name="matrixArray">2D array to create a matrix.</param>
     public Matrix(T[,] matrixArray)
     {
-        if (matrixArray.Rank != 2)
-        {
-            throw new ArgumentException("The array must be 2D.");
-        }
-        
         MatrixArray = matrixArray;
     }
 
     /// <summary>
     /// Matrix array.
     /// </summary>
-    public T[,] MatrixArray { get; protected set; }
+    public T[,] MatrixArray { get; }
     
     /// <summary>
     /// Adds two matrices.
@@ -48,7 +43,7 @@ public class Matrix<T> where T : struct, INumber<T>
         {
             for (var j = 0; j < matrix1.MatrixArray.GetLength(1); j++)
             {
-                resultArr[i, j] = (dynamic)matrix1.MatrixArray[i, j] + matrix2.MatrixArray[i, j];
+                resultArr[i, j] = matrix1.MatrixArray[i, j] + matrix2.MatrixArray[i, j];
             }
         }
 
@@ -76,7 +71,7 @@ public class Matrix<T> where T : struct, INumber<T>
         {
             for (var j = 0; j < matrix1.MatrixArray.GetLength(1); j++)
             {
-                resultArr[i, j] = (dynamic)matrix1.MatrixArray[i, j] - matrix2.MatrixArray[i, j];
+                resultArr[i, j] = matrix1.MatrixArray[i, j] - matrix2.MatrixArray[i, j];
             }
         }
 
@@ -107,7 +102,7 @@ public class Matrix<T> where T : struct, INumber<T>
             {
                 for (var k = 0; k < matrix1.MatrixArray.GetLength(1); k++)
                 {
-                    resultArr[i, j] = (dynamic)resultArr[i, j] + matrix1.MatrixArray[i, k] * matrix2.MatrixArray[k, j];
+                    resultArr[i, j] += matrix1.MatrixArray[i, k] * matrix2.MatrixArray[k, j];
                 }
             }
         }
@@ -129,7 +124,7 @@ public class Matrix<T> where T : struct, INumber<T>
         {
             for (var j = 0; j < matrix.MatrixArray.GetLength(1); j++)
             {
-                resultArr[i, j] = (dynamic)matrix.MatrixArray[i, j] * number;
+                resultArr[i, j] = matrix.MatrixArray[i, j] * number;
             }
         }
 
