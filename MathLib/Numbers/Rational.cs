@@ -17,6 +17,16 @@ public readonly struct Rational<T> : INumber<Rational<T>> where T : IBinaryInteg
         Numerator = T.Zero;
         Denominator = T.One;
     }
+    
+    /// <summary>
+    /// Create a rational number from a integer number. The denominator will be 1.
+    /// </summary>
+    /// <param name="integerNumber">Integer number.</param>
+    public Rational(T integerNumber)
+    {
+        Numerator = integerNumber;
+        Denominator = T.One;
+    }
 
     /// <summary>
     /// Create a rational number from a numerator and a denominator.

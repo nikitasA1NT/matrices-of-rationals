@@ -71,7 +71,7 @@ public class SquareMatrix<T> : Matrix<T> where T : INumber<T>, new()
             return MatrixArray[0, 0];
         }
 
-        T det = default;
+        var det = new T();
         for (var i = 0; i < MatrixArray.GetLength(0); i++)
         {
             det += MatrixArray[0, i] * Cofactor(0, i);
@@ -85,7 +85,7 @@ public class SquareMatrix<T> : Matrix<T> where T : INumber<T>, new()
     /// </summary>
     /// <returns>Invertible matrix.</returns>
     /// <exception cref="ArithmeticException">Thrown when the determinant is zero.</exception>
-    public SquareMatrix<T> Invertible()
+    public SquareMatrix<T> Inverse()
     {
         var det = Determinant();
         if (det == T.Zero)

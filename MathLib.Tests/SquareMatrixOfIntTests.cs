@@ -42,7 +42,7 @@ public class SquareMatrixOfIntTests
         
         var expected = new SquareMatrix<int>(arrForExpected);
         
-        var actual = _sourceMatrix.Invertible();
+        var actual = _sourceMatrix.Inverse();
         
         Assert.That(actual.MatrixArray, Is.EqualTo(expected.MatrixArray));
     }
